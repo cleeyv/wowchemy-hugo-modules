@@ -424,8 +424,8 @@ collections:
         required: false
         widget: "list"
     #  - {label: "Markdown slides (reference a deck in 'content/slides/')", name: "slides", widget: "string", required: false}
-      - label: "Upload a pdf named `{{filename}}.pdf`"
-        name: "filename"
+      - label: "Upload a pdf named {{title}} `title-of-this-article.pdf` with spaces replaced with dashes"
+        name: "pdf_filename"
         widget: "file"
     #    default: "featured"
         required: false
