@@ -372,7 +372,7 @@ collections:
     fields: # The fields each document in this collection have
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Subtitle", name: "subtitle", widget: "string", required: false }
-      - label: "Publication type"
+      - label: "Publication type TEST"
         name: "publication_types"
         required: true
         default: ["0"]
