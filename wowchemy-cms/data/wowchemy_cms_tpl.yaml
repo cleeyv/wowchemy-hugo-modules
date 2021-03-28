@@ -4,6 +4,9 @@ backend:
   squash_merges: true
 media_folder: 'assets/media'
 public_folder: '/media'
+i18n:
+  structure: multiple_folders
+  locales: [en, fr]
 collections:
   - name: home
     label: "Homepage"
@@ -15,10 +18,11 @@ collections:
     summary: "{{filename}}: {{title}}"
     identifier_field: "widget_id"
     create: true
+    i18n: true
     fields:
-      - {label: "Widget Type (https://wowchemy.com/docs/page-builder/)", name: "widget", widget: "string", required: true}
-      - {label: 'Your reference for this widget (e.g. recent-posts)', name: 'widget_id', widget: 'string', default: 'my-widget-123'}
-      - {label: "Headless?", name: "headless", widget: "hidden", default: true}
+      - {label: "Widget Type (https://wowchemy.com/docs/page-builder/)", name: "widget", widget: "string", required: true, i18n: duplicate}
+      - {label: 'Your reference for this widget (e.g. recent-posts)', name: 'widget_id', widget: 'string', default: 'my-widget-123', i18n: duplicate}
+      - {label: "Headless?", name: "headless", widget: "hidden", default: true, i18n: duplicate}
       - label: "Widget position"
         name: "weight"
         widget: "number"
@@ -27,32 +31,37 @@ collections:
         min: 0
         max: 1001
         step: 10
-      - {label: "Title", name: "title", widget: "string", required: false}
-      - {label: "Subtitle", name: "subtitle", widget: "string", required: false}
+        i18n: true
+      - {label: "Title", name: "title", widget: "string", required: false, i18n: true}
+      - {label: "Subtitle", name: "subtitle", widget: "string", required: false, i18n: true}
       - label: "Enabled?"
         name: "active"
         required: false
         widget: "boolean"
         default: true
+        i18n: true
       - label: "Widget Style"
         name: "design"
         widget: "object"
         required: false
+        i18n: true
         fields:
-          - {label: "Columns (options: `1` or `2`)", name: "columns", widget: "string", default: "2", required: false}
+          - {label: "Columns (options: `1` or `2`)", name: "columns", widget: "string", default: "2", required: false, i18n: duplicate}
           - label: "Background"
             name: "background"
             widget: "object"
             required: false
+            i18n: true
             fields:
-              - {label: 'Solid color', name: 'color', widget: 'color', enableAlpha: true, allowInput: true, required: false}
-              - {label: 'Gradient start', name: 'gradient_start', widget: 'color', enableAlpha: true, allowInput: true, required: false}
-              - {label: 'Gradient end', name: 'gradient_end', widget: 'color', enableAlpha: true, allowInput: true, required: false}
+              - {label: 'Solid color', name: 'color', widget: 'color', enableAlpha: true, allowInput: true, required: false, i18n: duplicate}
+              - {label: 'Gradient start', name: 'gradient_start', widget: 'color', enableAlpha: true, allowInput: true, required: false, i18n: duplicate}
+              - {label: 'Gradient end', name: 'gradient_end', widget: 'color', enableAlpha: true, allowInput: true, required: false, i18n: duplicate}
               - label: "Use a light text color?"
                 name: "text_color_light"
                 required: false
                 widget: "boolean"
                 default: false
+                i18n: duplicate
               - label: "Image"
                 name: "image"
                 widget: "image"
@@ -63,6 +72,7 @@ collections:
                 media_library:
                   config:
                     multiple: false
+                i18n: true
               - label: "Darken the image? (0 is transparent & 1 is opaque)"
                 name: "image_darken"
                 widget: "number"
@@ -72,7 +82,8 @@ collections:
                 max: 1.0
                 step: 0.1
                 required: false
-      - {label: "Body", name: "body", widget: "markdown", required: false}
+                i18n: duplicate
+      - {label: "Body", name: "body", widget: "markdown", required: false, i18n: true}
   - name: authors
     label: Authors
     label_singular: Author
@@ -80,9 +91,10 @@ collections:
     path: '{{slug}}/_index'
     filter: {field: "cms_exclude"}
     create: true  # Allow users to create new documents in this collection
+    i18n: true
     fields:  # The fields each document in this collection have
-      - {label: "Display name (such as your full name)", name: "title", widget: "string"}
-      - {label: "Position or tagline (such as Professor of AI)", name: "role", widget: "string", required: false}
+      - {label: "Display name (such as your full name)", name: "title", widget: "string", i18n: true}
+      - {label: "Position or tagline (such as Professor of AI)", name: "role", widget: "string", required: false, i18n: true}
       - label: "Avatar (upload an image named `avatar.jpg/png`)"
         name: "avatar_filename"
         widget: "image"
@@ -91,16 +103,19 @@ collections:
         media_library:
           config:
             multiple: false
-      - {label: "Short biography (shown in author boxes)", name: "bio", widget: "string", required: false}
-      - {label: "Full biography (shown in About widget)", name: "body", widget: "markdown", required: false}
+        i18n: duplicate
+      - {label: "Short biography (shown in author boxes)", name: "bio", widget: "string", required: false, i18n: true}
+      - {label: "Full biography (shown in About widget)", name: "body", widget: "markdown", required: false, i18n: true}
       - label: "Interests (shown in About widget)"
         name: "interests"
         required: false
         widget: "list"
+        i18n: true
       - label: Social links
         name: social
         required: false
         widget: list
+        i18n: true
         fields:
           - {label: Link, name: link, widget: string}
           - label: Icon pack
@@ -128,6 +143,7 @@ collections:
         name: "organizations"
         required: false
         widget: list
+        i18n: true
         fields:
           - {label: Organization, name: name, widget: string, required: true}
           - {label: Link, name: url, widget: string, required: false}
@@ -135,24 +151,28 @@ collections:
         name: "education"
         required: false
         widget: object
+        i18n: true
         fields:
           - label: "Courses"
             name: "courses"
             required: false
             widget: list
+            i18n: true
             fields:
               - {label: Course, name: course, widget: string, required: true}
               - {label: Institution, name: institution, widget: string, required: true}
               - {label: Year, name: year, widget: number, value_type: int, required: false}
-      - {label: "Email (to use a Gravatar.com avatar)", name: "email", widget: "string", required: false}
+      - {label: "Email (to use a Gravatar.com avatar)", name: "email", widget: "string", required: false, i18n: duplicate}
       - label: "Super user (is this the primary site user?)"
         name: "superuser"
         widget: "boolean"
         default: false
+        i18n: duplicate
       - label: "User groups (only for organization websites)"
         name: "user_groups"
         required: false
         widget: "list"
+        i18n: true
   - name: posts
     label: Posts
     label_singular: Post
@@ -160,42 +180,50 @@ collections:
     path: '{{slug}}/index'
     filter: {field: "cms_exclude"}
     create: true  # Allow users to create new documents in this collection
+    i18n: true
     fields:  # The fields each document in this collection have
-      - {label: "Title", name: "title", widget: "string"}
-      - {label: "Subtitle", name: "subtitle", widget: "string", required: false}
-      - {label: "Body", name: "body", widget: "markdown"}
-      - {label: "Publish this page on", name: "date", widget: "datetime"}
-      - {label: "Summary", name: "summary", widget: "markdown", required: false}
+      - {label: "Title", name: "title", widget: "string", i18n: true}
+      - {label: "Subtitle", name: "subtitle", widget: "string", required: false, i18n: true}
+      - {label: "Body", name: "body", widget: "markdown", i18n: true}
+      - {label: "Publish this page on", name: "date", widget: "datetime", i18n: true}
+      - {label: "Summary", name: "summary", widget: "markdown", required: false, i18n: true}
       - label: "Draft"
         name: "draft"
         widget: "boolean"
         default: false
         required: false
+        i18n: true
       - label: "Featured"
         name: "featured"
         widget: "boolean"
         default: false
         required: false
+        i18n: true
       - label: "Authors"
         name: "authors"
         required: false
         widget: "list"
+        i18n: true
       - label: "Tags"
         name: "tags"
         required: false
         widget: "list"
+        i18n: true
       - label: "Categories"
         name: "categories"
         required: false
         widget: "list"
+        i18n: true
       - label: "Projects"
         name: "projects"
         required: false
         widget: "list"
+        i18n: true
       - label: "Featured Image"
         name: "image"
         required: false
         widget: object
+        i18n: true
         fields:
           - label: "Upload an image named `featured.jpg/png`"
             name: "filename"
@@ -205,10 +233,11 @@ collections:
             media_library:
               config:
                 multiple: false
-          - {label: Caption, name: caption, widget: string, required: false}
-          - {label: Description for screen readers, name: alt_text, widget: string, required: false}
-          - {label: "Where's the focal point in the image? Smart, Center, TopLeft, Top, TopRight, Left, Right, BottomLeft, Bottom, BottomRight.", name: focal_point, widget: string, required: false, default: "Smart"}
-          - {label: 'Thumbnail Only?', name: preview_only, widget: boolean, default: false, required: false}
+            i18n: true
+          - {label: Caption, name: caption, widget: string, required: false, i18n: true}
+          - {label: Description for screen readers, name: alt_text, widget: string, required: false, i18n: true}
+          - {label: "Where's the focal point in the image? Smart, Center, TopLeft, Top, TopRight, Left, Right, BottomLeft, Bottom, BottomRight.", name: focal_point, widget: string, required: false, default: "Smart", i18n: true}
+          - {label: 'Thumbnail Only?', name: preview_only, widget: boolean, default: false, required: false, i18n: true}
   - name: projects
     label: Projects
     label_singular: Project
@@ -216,35 +245,41 @@ collections:
     path: '{{slug}}/index'
     filter: {field: "cms_exclude"}
     create: true  # Allow users to create new documents in this collection
+    i18n: true
     fields:  # The fields each document in this collection have
-      - {label: "Title", name: "title", widget: "string"}
-      - {label: "Subtitle", name: "subtitle", widget: "string", required: false}
-      - {label: "Body", name: "body", widget: "markdown", required: false}
-      - {label: "Publish this page on", name: "date", widget: "datetime"}
-      - {label: "Summary", name: "summary", widget: "markdown", required: false}
+      - {label: "Title", name: "title", widget: "string", i18n: true}
+      - {label: "Subtitle", name: "subtitle", widget: "string", required: false, i18n: true}
+      - {label: "Body", name: "body", widget: "markdown", required: false, i18n: true}
+      - {label: "Publish this page on", name: "date", widget: "datetime", i18n: true}
+      - {label: "Summary", name: "summary", widget: "markdown", required: false, i18n: true}
       - label: "Draft"
         name: "draft"
         widget: "boolean"
         default: false
         required: false
+        i18n: true
       - label: "Featured"
         name: "featured"
         widget: "boolean"
         default: false
         required: false
+        i18n: true
       - label: "Authors"
         name: "authors"
         required: false
         widget: "list"
+        i18n: true
       - label: "Tags"
         name: "tags"
         required: false
         widget: "list"
+        i18n: true
       - label: "Categories"
         name: "categories"
         required: false
         widget: "list"
-      - {label: "External link (optional - replaces link to project page)", name: "external_link", widget: "string"}
+        i18n: true
+      - {label: "External link (optional - replaces link to project page)", name: "external_link", widget: "string", i18n: true}
       - label: Links
         name: links
         required: false
@@ -268,6 +303,7 @@ collections:
         name: "image"
         required: false
         widget: object
+        i18n: true
         fields:
           - label: "Upload an image named `featured.jpg/png`"
             name: "filename"
@@ -277,10 +313,11 @@ collections:
             media_library:
               config:
                 multiple: false
-          - {label: Caption, name: caption, widget: string, required: false}
-          - {label: Description for screen readers, name: alt_text, widget: string, required: false}
-          - {label: "Where's the focal point in the image? Smart, Center, TopLeft, Top, TopRight, Left, Right, BottomLeft, Bottom, BottomRight.", name: focal_point, widget: string, required: false, default: "Smart"}
-          - {label: 'Thumbnail Only?', name: preview_only, widget: boolean, default: false, required: false}
+            i18n: true      
+          - {label: Caption, name: caption, widget: string, required: false, i18n: true}
+          - {label: Description for screen readers, name: alt_text, widget: string, required: false, i18n: true}
+          - {label: "Where's the focal point in the image? Smart, Center, TopLeft, Top, TopRight, Left, Right, BottomLeft, Bottom, BottomRight.", name: focal_point, widget: string, required: false, default: "Smart", i18n: true}
+          - {label: 'Thumbnail Only?', name: preview_only, widget: boolean, default: false, required: false, i18n: true}
   - name: events
     label: Events
     label_singular: Event
@@ -288,17 +325,19 @@ collections:
     path: '{{slug}}/index'
     filter: {field: "cms_exclude"}
     create: true  # Allow users to create new documents in this collection
+    i18n: true
     fields:  # The fields each document in this collection have
-      - {label: "Title", name: "title", widget: "string"}
-      - {label: "Abstract", name: "abstract", widget: "text"}
-      - {label: "Where", name: "location", widget: "text"}
-      - {label: "From", name: "date", widget: "datetime"}
-      - {label: "To", name: "date_end", widget: "datetime", default: ""}
-      - {label: "All day event?", name: "all_day", widget: "boolean", default: false}
+      - {label: "Title", name: "title", widget: "string", i18n: true}
+      - {label: "Abstract", name: "abstract", widget: "text", i18n: true}
+      - {label: "Where", name: "location", widget: "text", i18n: true}
+      - {label: "From", name: "date", widget: "datetime", i18n: true}
+      - {label: "To", name: "date_end", widget: "datetime", default: "", i18n: true}
+      - {label: "All day event?", name: "all_day", widget: "boolean", default: false, i18n: duplicate}
       - label: Links/Tickets
         name: links
         required: false
         widget: list
+        i18n: true
         fields:
           - {label: Link, name: url, widget: string}
           - {label: Link text, name: name, widget: string, required: false}
@@ -314,40 +353,47 @@ collections:
               - {label: "Brand", value: "fab"}
               - {label: "Academic", value: "ai"}
           - {label: "Icon (see https://wowchemy.com/docs/page-builder/#icons)", name: icon, widget: string, required: false}
-      - {label: "Event", name: "event", widget: "string"}
-      - {label: "Event link", name: "event_url", widget: "string"}
-      - {label: "Publish this page on", name: "publishDate", widget: "datetime"}
-      - {label: "Markdown slides (reference a deck in 'content/slides/')", name: "slides", widget: "string", required: false}
+      - {label: "Event", name: "event", widget: "string", i18n: true}
+      - {label: "Event link", name: "event_url", widget: "string", i18n: true}
+      - {label: "Publish this page on", name: "publishDate", widget: "datetime", i18n: true}
+      - {label: "Markdown slides (reference a deck in 'content/slides/')", name: "slides", widget: "string", required: false, i18n: true}
       - label: "Draft"
         name: "draft"
         widget: "boolean"
         default: false
         required: false
+        i18n: true
       - label: "Featured"
         name: "featured"
         widget: "boolean"
         default: false
         required: false
+        i18n: true
       - label: "Authors"
         name: "authors"
         required: false
         widget: "list"
+        i18n: true
       - label: "Tags"
         name: "tags"
         required: false
         widget: "list"
+        i18n: true
       - label: "Categories"
         name: "categories"
         required: false
         widget: "list"
+        i18n: true
       - label: "Projects (reference projects in 'content/project/')"
         name: "projects"
         required: false
         widget: "list"
+        i18n: true
       - label: "Featured Image"
         name: "image"
         required: false
         widget: object
+        i18n: true
         fields:
           - label: "Upload an image named `featured.jpg/png`"
             name: "filename"
@@ -357,11 +403,12 @@ collections:
             media_library:
               config:
                 multiple: false
-          - {label: Caption, name: caption, widget: string, required: false}
-          - {label: Description for screen readers, name: alt_text, widget: string, required: false}
-          - {label: "Where's the focal point in the image? Smart, Center, TopLeft, Top, TopRight, Left, Right, BottomLeft, Bottom, BottomRight.", name: focal_point, widget: string, required: false, default: "Smart"}
-          - {label: 'Thumbnail Only?', name: preview_only, widget: boolean, default: false, required: false}
-      - {label: "Details", name: "body", widget: "markdown", required: false}
+            i18n: true
+          - {label: Caption, name: caption, widget: string, required: false, i18n: true}
+          - {label: Description for screen readers, name: alt_text, widget: string, required: false, i18n: true}
+          - {label: "Where's the focal point in the image? Smart, Center, TopLeft, Top, TopRight, Left, Right, BottomLeft, Bottom, BottomRight.", name: focal_point, widget: string, required: false, default: "Smart", i18n: true}
+          - {label: 'Thumbnail Only?', name: preview_only, widget: boolean, default: false, required: false, i18n: true}
+      - {label: "Details", name: "body", widget: "markdown", required: false, i18n: true}
   - name: publications
     label: Publications
     label_singular: Publication
@@ -369,9 +416,10 @@ collections:
     path: '{{slug}}/index'
     filter: {field: "cms_exclude"}
     create: true  # Allow users to create new documents in this collection
+    i18n: true
     fields: # The fields each document in this collection have
-      - { label: "Title", name: "title", widget: "string" }
-      - { label: "Subtitle", name: "subtitle", widget: "string", required: false }
+      - { label: "Title", name: "title", widget: "string", i18n: true}
+      - { label: "Subtitle", name: "subtitle", widget: "string", required: false, i18n: true}
     #  - label: "Publication type"
     #    name: "publication_types"
     #    required: true
@@ -379,6 +427,7 @@ collections:
     #    widget: "select"
     #    # Can only have 1 pub. type assigned, but need `multiple` option to save as a Hugo taxonomy list.
     #    multiple: true
+    #    i18n: duplicate
     #    options:
     #      - { label: "Uncategorized", value: "0" }
     #      - { label: "Conference paper", value: "1" }
@@ -393,38 +442,45 @@ collections:
         name: "authors"
         required: true
         widget: "list"
+        i18n: true
     #  - label: "Author Notes (contributions or affiliations for each author)"
     #    name: "author_notes"
     #    required: false
-        widget: "list"
-    #  - { label: "DOI", name: "doi", widget: "string", required: false }
-      - { label: "Publication", name: "publication", widget: "string", required: false }
-    #  - { label: "Publication (abbreviated)", name: "publication_short", widget: "string", required: false }
-    #  - { label: "Abstract", name: "abstract", widget: "text", required: false }
+    #    widget: "list"
+    #    i18n: true
+    #  - { label: "DOI", name: "doi", widget: "string", required: false, i18n: duplicate}
+      - { label: "Publication", name: "publication", widget: "string", required: false, i18n: true}
+    #  - { label: "Publication (abbreviated)", name: "publication_short", widget: "string", required: false, i18n: true}
+    #  - { label: "Abstract", name: "abstract", widget: "text", required: false, i18n: true}
       - label: "Draft"
         name: "draft"
         widget: "boolean"
         default: false
         required: false
+        i18n: true
       - label: "Featured"
         name: "featured"
         widget: "boolean"
         default: false
         required: false
+        i18n: true
       - label: "Tags"
         name: "tags"
         required: false
         widget: "list"
+        i18n: true
       - label: "Categories"
         name: "categories"
         required: false
         widget: "list"
+        i18n: true
       - label: "Projects"
         name: "projects"
         required: false
         widget: "list"
-    #  - {label: "Markdown slides (reference a deck in 'content/slides/')", name: "slides", widget: "string", required: false}
-      - label: "Upload a pdf named {{title}} `title-of-this-article.pdf` with spaces replaced with dashes"
+        i18n: true
+    #  - {label: "Markdown slides (reference a deck in 'content/slides/')", name: "slides", widget: "string", required: false, i18n: true}
+      - label: "Upload a pdf named `title-of-this-article.pdf` (all lowercase, spaces replaced with dashes)"
         name: "pdf_filename"
         widget: "file"
     #    default: "featured"
@@ -432,10 +488,12 @@ collections:
         media_library:
           config:
             multiple: false
+        i18n: true
       - label: "Featured Image"
         name: "image"
         required: false
         widget: object
+        i18n: true
         fields:
           - label: "Upload an image named `featured.jpg/png`"
             name: "filename"
@@ -445,13 +503,14 @@ collections:
             media_library:
               config:
                 multiple: false
-          - { label: Caption, name: caption, widget: string, required: false }
-          - { label: Description for screen readers, name: alt_text, widget: string, required: false }
-          - { label: "Where's the focal point in the image? Smart, Center, TopLeft, Top, TopRight, Left, Right, BottomLeft, Bottom, BottomRight.", name: focal_point, widget: string, required: false, default: "Smart" }
-          - { label: 'Thumbnail Only?', name: preview_only, widget: boolean, default: false, required: false }
-      - { label: "Summary (shortened abstract)", name: "summary", widget: "text", required: false }
-      - {label: "Details", name: "body", widget: "markdown", required: false}
-      - { label: "Publish this page on", name: "date", widget: "datetime" }
+            i18n: true
+          - { label: Caption, name: caption, widget: string, required: false, i18n: true}
+          - { label: Description for screen readers, name: alt_text, widget: string, required: false, i18n: true}
+          - { label: "Where's the focal point in the image? Smart, Center, TopLeft, Top, TopRight, Left, Right, BottomLeft, Bottom, BottomRight.", name: focal_point, widget: string, required: false, default: "Smart", i18n: true}
+          - { label: 'Thumbnail Only?', name: preview_only, widget: boolean, default: false, required: false, i18n: true}
+      - { label: "Summary (shortened abstract)", name: "summary", widget: "text", required: false, i18n: true}
+      - {label: "Details", name: "body", widget: "markdown", required: false, i18n: true}
+      - { label: "Publish this page on", name: "date", widget: "datetime", i18n: true}
   - name: slides
     label: Slides
     label_singular: Slides
@@ -459,30 +518,35 @@ collections:
     path: '{{slug}}/index'
     filter: {field: "cms_exclude"}
     create: true  # Allow users to create new documents in this collection
+    i18n: true
     fields:  # The fields each document in this collection have
-      - {label: "Title", name: "title", widget: "string"}
-      - {label: "Slides (separate with `---`)", name: "body", widget: "markdown"}
-      - {label: "Publish on", name: "date", widget: "datetime"}
-      - {label: "Summary", name: "summary", widget: "text", required: false}
+      - {label: "Title", name: "title", widget: "string", i18n: true}
+      - {label: "Slides (separate with `---`)", name: "body", widget: "markdown", i18n: true}
+      - {label: "Publish on", name: "date", widget: "datetime", i18n: true}
+      - {label: "Summary", name: "summary", widget: "text", required: false, i18n: true}
       - label: "Draft"
         name: "draft"
         widget: "boolean"
         default: false
         required: false
+        i18n: true
       - label: "Tags"
         name: "tags"
         required: false
         widget: "list"
+        i18n: true
       - label: "Slide options"
         name: "slides"
         required: false
         widget: object
+        i18n: true
         fields:
-          - { label: "Theme (see https://github.com/hakimel/reveal.js#theming)", name: theme, widget: string, required: false, default: black }
+          - { label: "Theme (see https://github.com/hakimel/reveal.js#theming)", name: theme, widget: string, required: false, default: black, i18n: duplicate}
       - label: "Featured Image"
         name: "image"
         required: false
         widget: object
+        i18n: true
         fields:
           - label: "Upload an image named `featured.jpg/png`"
             name: "filename"
@@ -492,38 +556,46 @@ collections:
             media_library:
               config:
                 multiple: false
-          - {label: Caption, name: caption, widget: string, required: false}
-          - {label: Description for screen readers, name: alt_text, widget: string, required: false}
-          - {label: "Where's the focal point in the image? Smart, Center, TopLeft, Top, TopRight, Left, Right, BottomLeft, Bottom, BottomRight.", name: focal_point, widget: string, required: false, default: "Smart"}
-          - {label: 'Thumbnail Only?', name: preview_only, widget: boolean, default: false, required: false}
+            i18n: true
+          - {label: Caption, name: caption, widget: string, required: false, i18n: true}
+          - {label: Description for screen readers, name: alt_text, widget: string, required: false, i18n: true}
+          - {label: "Where's the focal point in the image? Smart, Center, TopLeft, Top, TopRight, Left, Right, BottomLeft, Bottom, BottomRight.", name: focal_point, widget: string, required: false, default: "Smart", i18n: true}
+          - {label: 'Thumbnail Only?', name: preview_only, widget: boolean, default: false, required: false, i18n: true}
   - name: pages
     label: "Pages"
+    i18n:
+      structure: single_file
+      locales: [en, fr]
     files:
       - file: "content/privacy.md"
         label: "Privacy Policy"
         name: "privacy"
+        i18n: true
         fields:
-          - {label: "Title", name: "title", widget: "string"}
-          - {label: "Publish Date", name: "date", widget: "datetime"}
-          - {label: "Subtitle", name: "subtitle", widget: "string", required: false}
-          - {label: "Summary", name: "summary", widget: "markdown", required: false}
+          - {label: "Title", name: "title", widget: "string", i18n: true}
+          - {label: "Publish Date", name: "date", widget: "datetime", i18n: true}
+          - {label: "Subtitle", name: "subtitle", widget: "string", required: false, i18n: true}
+          - {label: "Summary", name: "summary", widget: "markdown", required: false, i18n: true}
           - label: "Draft"
             name: "draft"
             required: false
             widget: "boolean"
             default: false
-          - {label: "Body", name: "body", widget: "markdown"}
+            i18n: true
+          - {label: "Body", name: "body", widget: "markdown", i18n: true}
       - file: "content/terms.md"
         label: "Terms"
         name: "terms"
+        i18n: true
         fields:
-          - {label: "Title", name: "title", widget: "string"}
-          - {label: "Publish Date", name: "date", widget: "datetime"}
-          - {label: "Subtitle", name: "subtitle", widget: "string", required: false}
-          - {label: "Summary", name: "summary", widget: "markdown", required: false}
+          - {label: "Title", name: "title", widget: "string", i18n: true}
+          - {label: "Publish Date", name: "date", widget: "datetime", i18n: true}
+          - {label: "Subtitle", name: "subtitle", widget: "string", required: false, i18n: true}
+          - {label: "Summary", name: "summary", widget: "markdown", required: false, i18n: true}
           - label: "Draft"
             name: "draft"
             required: false
             widget: "boolean"
             default: false
-          - {label: "Body", name: "body", widget: "markdown"}
+            i18n: true
+          - {label: "Body", name: "body", widget: "markdown", i18n: true}
