@@ -5,7 +5,7 @@ backend:
 media_folder: 'assets/media'
 public_folder: '/media'
 i18n:
-  structure: multiple_folders
+  structure: locale_folders
   locales: [en, fr]
 collections:
   - name: home
