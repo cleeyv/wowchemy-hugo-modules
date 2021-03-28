@@ -6,7 +6,7 @@ media_folder: 'assets/media'
 public_folder: '/media'
 i18n:
   structure: locale_folders
-  locales: [en, fr]
+#  locales: [en, fr]
 collections:
   - name: home
     label: "Homepage"
