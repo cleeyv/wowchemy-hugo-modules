@@ -563,39 +563,35 @@ collections:
           - {label: 'Thumbnail Only?', name: preview_only, widget: boolean, default: false, required: false, i18n: true}
   - name: pages
     label: "Pages"
-    i18n:
-      structure: single_file
-      locales: [en, fr]
+    #    i18n:
+    #  structure: single_file
+    #  locales: [en, fr]
     files:
       - file: "content/privacy.md"
         label: "Privacy Policy"
         name: "privacy"
-        i18n: false
         fields:
-          - {label: "Title", name: "title", widget: "string", i18n: false}
-          - {label: "Publish Date", name: "date", widget: "datetime", i18n: false}
-          - {label: "Subtitle", name: "subtitle", widget: "string", required: false, i18n: false}
-          - {label: "Summary", name: "summary", widget: "markdown", required: false, i18n: false}
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Publish Date", name: "date", widget: "datetime"}
+          - {label: "Subtitle", name: "subtitle", widget: "string", required: false}
+          - {label: "Summary", name: "summary", widget: "markdown", required: false}
           - label: "Draft"
             name: "draft"
             required: false
             widget: "boolean"
             default: false
-            i18n: false
           - {label: "Body", name: "body", widget: "markdown", i18n: true}
       - file: "content/terms.md"
         label: "Terms"
         name: "terms"
-        i18n: false
         fields:
-          - {label: "Title", name: "title", widget: "string", i18n: false}
-          - {label: "Publish Date", name: "date", widget: "datetime", i18n: false}
-          - {label: "Subtitle", name: "subtitle", widget: "string", required: false, i18n: false}
-          - {label: "Summary", name: "summary", widget: "markdown", required: false, i18n: false}
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Publish Date", name: "date", widget: "datetime"}
+          - {label: "Subtitle", name: "subtitle", widget: "string", required: false}
+          - {label: "Summary", name: "summary", widget: "markdown", required: false}
           - label: "Draft"
             name: "draft"
             required: false
             widget: "boolean"
             default: false
-            i18n: false
-          - {label: "Body", name: "body", widget: "markdown", i18n: false}
+          - {label: "Body", name: "body", widget: "markdown"}
