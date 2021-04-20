@@ -415,8 +415,10 @@ collections:
   - name: publications
     label: Publications
     label_singular: Publication
-    folder: 'content/publication'
-    path: '{{slug}}/index'
+    folder: 'content'
+    nested:
+      depth: 5
+    path: 'publications/{{slug}}/index'
     filter: {field: "cms_exclude"}
     create: true  # Allow users to create new documents in this collection
     i18n: true
