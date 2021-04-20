@@ -1,7 +1,10 @@
 backend:
-  name: git-gateway
-  branch: main
-  squash_merges: true
+  name: gitlab
+  repo: sabordage/website
+  auth_type: pkce
+  app_id: 74881662a6bf937b61c7da0500ff756c2ac9fb3a500ff0e74bfd9cc0be176cef
+  #  branch: main
+  #  squash_merges: true
 media_folder: 'assets/media'
 public_folder: '/media'
 i18n:
